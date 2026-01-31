@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add teacher</title>
+    <link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
+
+</head>
+<body>
+    <div class="container box" style="width: 45%;margin-top: 100px;">
+        <p class="is-capitalized has-text-centered">{{success}} {{error}}</p>
+        <form action="{% url 'addteacher' %}" method="post">
+            {% csrf_token %}
+            <div class="field">
+                <div class="control">
+                    <input type="text" class="input" placeholder="teacher name" name="name">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <p class="is-capitalized">gender</p>
+                    <label for="" class="radio">male
+                        <input type="radio" name="gender" value="m">
+                    </label>
+
+                    <label for="" class="radio">female
+                        <input type="radio" name="gender" value="f">
+                    </label>
+                </div>
+            </div>
+
+            <div class="field is-grouped is-grouped-centered">
+                <div class="control">
+                    <input type="submit" class="button" value="Add">
+                </div>
+
+                <div class="control">
+                    <a href="{% url 'dashboard' %}" class="is-capitalized button">
+                        back
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

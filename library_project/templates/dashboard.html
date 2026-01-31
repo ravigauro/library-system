@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free-7.0.0-web/css/all.min.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar has-background-grey is-fixed-top">
+            <div class="navbar-brand">
+                <figure class="image navbar-item">
+                    <img src="{% static 'book.png' %}" alt="image" class="is-rounded">
+                </figure>
+
+                <button class="navbar-burger has-text-white" data-target="burger" id="burger">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <div class="navbar-menu has-background-grey" id="burger-menu">
+                <div class="navbar-start is-flex-grow-1 is-justify-content-center">
+                    <div class="navbar-item">
+                        <p class="has-text-white is-capitalized is-size-5 has-text-centered">welcome to library dashboard</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section mt-6">
+            <div class="is-flex mt-6" style="overflow: auto;">
+                <aside class="menu box mr-6" style="width:300px;border-style: solid; border-style: solid;border-color:grey;">
+                    <p class="menu-label has-text-centered has-text-weight-bold has-text-grey is-size-5">dashboard</p>
+                    <hr>
+                    <div class="menu-list">
+                        <ul>
+                            <li>
+                                <a href="{% url 'addbook' %}" class="is-capitalized">
+                                    <span class="icon has-icons-left">
+                                        <span class="is-left">
+                                            <i class="fas fa-book"></i>
+                                        </span>
+                                    </span>
+                                    add books
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="{% url 'booklist' %}" class="is-capitalized">
+                                    <span class="icon has-icons-left">
+                                        <span class="is-left">
+                                            <i class="fas fa-book"></i>
+                                        </span>
+                                    </span>
+                                    book list
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'addstudent' %}" class="is-capitalized">
+                                    <span class="icon has-icons-left">
+                                        <span class="is-left">
+                                            <i class="fas fa-users"></i>
+                                        </span>
+                                    </span>
+                                    add students
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="{% url 'withdrawbook' %}" class="is-capitalized">
+                                    <span class="icon has-icons-left">
+                                        <span class="is-left">
+                                            <i class="fas fa-book"></i>
+                                        </span>
+                                    </span>
+                                    withdraw book 
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="{% url 'withdrawlist' %}" class="is-capitalized">
+                                    <span class="icon has-icons-left">
+                                        <span class="is-left">
+                                            <i class="fas fa-book"></i>
+                                        </span>
+                                    </span>
+                                    withdrawn/returned
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <div class="dropdown mb-6" id="settings-dropdown">
+                                    <div class="dropdown-trigger">
+                                        <button class="has-background-white">
+                                            <span class="icon">
+                                                <i class="fas fa-gear"></i>
+                                            </span> 
+
+                                            settings
+
+                                            <span class="icon">
+                                                <i class="fas fa-angle-down"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-content">
+                                            <a href="{% url 'logout' %}" class="dropdown-item">logout</a>
+                                            <a href="{% url 'passwordchange' %}" class="dropdown-item">change password</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+
+
+                <div class="fixed-grid has-3-cols-mobile ml-6">
+                    <div class="grid is-gap-8"> 
+                        {% for item in stats %}
+                        <div class="cell has-background-grey" style="width: 200px; height: 100px; border-style: solid; border-radius: 10px;">
+                            <p class="has-text-centered is-capitalized mt-2 has-text-white is-weight-bold">
+                                {{ item.name }}
+                            </p>
+                            <p class="has-text-centered mt-2 has-text-white is-size-4">
+                                {{ item.count }}
+                            </p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+    // Simple toggle logic
+    const dropdown = document.querySelector('#settings-dropdown');
+    const trigger = dropdown.querySelector('.dropdown-trigger');
+
+    trigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        dropdown.classList.toggle('is-active');
+    });
+
+    // Close when clicking outside
+    window.addEventListener('click', () => {
+        dropdown.classList.remove('is-active');
+    });
+   
+
+
+   document.addEventListener('DOMContentLoaded',()=>{
+    const burger=document.getElementById('burger');
+    const menu=document.getElementById('burger-menu');
+
+    burger.addEventListener('click',()=>{
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+
+    })
+   })
+</script>
+</body>
+</html>

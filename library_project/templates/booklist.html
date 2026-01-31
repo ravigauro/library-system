@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>book list</title>
+    <link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <table class="table table-container is-bordered is-fullwidth">
+            <caption class="caption">
+                <p class="">book list</p>
+            </caption>
+
+            <thead>
+                <tr>
+                    <th class="is-capitalized has-text-centered">book name</th>
+                    <th class="is-capitalized has-text-centered">book edition</th>
+                    <th class="is-capitalized has-text-centered">book writer</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for books_data in books %}
+                <tr>
+                    <td class="is-capitalized">{{books_data.book_name}}</td>
+                    <td class="is-capitalized">{{books_data.book_edition}}</td>
+                    <td class="is-capitalized">{{books_data.book_writer}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'dashboard' %}" class="button">back</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>withdraw list</title>
+    <link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <table class="table table-container is-bordered is-fullwidth">
+            <caption class="caption">
+                <p class="is-capitalized">withdraw/return</p>
+            </caption>
+
+            <thead>
+                <tr>
+                    <th class="is-capitalized has-text-centered">name</th>
+                    <th class="is-capitalized has-text-centered">book name</th>
+                    <th class="is-capitalized has-text-centered">faculty</th>
+                    <th class="is-capitalized has-text-centered">gender</th>
+                    <th class="is-capitalized has-text-centered">withdrawn date</th>
+                    <th class="is-capitalized has-text-centered">teacher or student</th>
+                    <th class="is-capitalized has-text-centered">operation</th>
+                    <th class="is-capitalized has-text-centered">book returned</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+                {% for books in books %}
+                <tr>
+                    <td class="is-capitalized">{{books.student_name}}</td>
+                    <td class="is-capitalized">{{books.book_name}}</td>
+                    <td class="is-capitalized">{{books.faculty}}</td>
+                    <td class="is-capitalized">{{books.gender}}</td>
+                    <td class="is-capitalized">{{books.date}}</td>
+                    <td class="is-capitalized">{{books.teacher_or_student}}</td>
+                    <td class="is-capitalized has-text-centered"><a href="{% url 'deletewithdrawlist' books.id %}" class="button is-capitalized">remove</a></td>
+                    <td class="">
+                        <div class="field is-grouped is-grouped-centered">
+                            <div class="control">
+                                {% if books.is_returned %}
+                                <button type="submit" class="button is-small is-capitalized" disabled>returned</button>
+                                {% else %}
+                                <a href="{% url 'returned' books.id %}" class="button is-capitalized">returned</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'dashboard' %}" class="button">back</a>
+    </div>
+</body>
+</html>

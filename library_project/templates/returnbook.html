@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>return book</title>
+    <link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
+
+</head>
+<body>
+    <div class="container box" style="width: 45%;margin-top: 100px;">
+        <form action="{% url 'returnbook' %}" method="post">
+            {% csrf_token %}
+            <p class="is-capitalized has-text-centered">{{success}} {{error}}</p>
+            <div class="field">
+                <div class="control">
+                    <input type="text" class="input" placeholder="student name" name="name">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input type="text" class="input" placeholder="faculty" name="faculty">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input type="text" class="input" placeholder="book name" name="book">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label for="" class="label is-capitalized">gender</label>
+                    <input type="radio" name="gender" value="m">male
+                    <input type="radio" name="gender" value="f">female
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label for="" class="label is-capitalized">date</label>
+                    <input type="date" name="date">
+                </div>
+            </div>
+
+
+            <div class="field is-grouped is-grouped-centered">
+                <div class="control">
+                    <input type="submit" class="button is-capitalized" value="return">
+                </div>
+
+                <div class="control">
+                    <a href="{% url 'dashboard' %}" class="is-capitalized button">
+                        back
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
